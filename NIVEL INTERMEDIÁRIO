@@ -1,0 +1,115 @@
+#include <stdio.h>
+
+// Definição da estrutura para organizar os dados das cartas
+typedef struct {
+    char pais[50];
+    int populacao;
+    float area;
+    float pib;
+    int pontos_turisticos;
+    float densidade_demografica;
+} Carta;
+
+int main() {
+    // --- CADASTRO DAS CARTAS (Dados previamente cadastrados) ---
+    Carta carta1 = {"Brasil", 214300000, 8515767.0, 1.61, 50, 25.16};
+    // PIB em trilhões, Área em km², Densidade = populacao / area
+    Carta carta2 = {"Japao", 125700000, 377975.0, 4.94, 80, 332.55}; 
+
+    int opcao;
+
+    // --- MENU INTERATIVO ---
+    printf("=== SUPER TRUNFO: PAÍSES ===\n");
+    printf("Escolha o atributo para comparacao:\n");
+    printf("1 - Populacao\n");
+    printf("2 - Area (km²)\n");
+    printf("3 - PIB (Trilhoes)\n");
+    printf("4 - Pontos Turisticos\n");
+    printf("5 - Densidade Demografica (hab/km²)\n");
+    printf("Digite a sua opcao: ");
+    scanf("%d", &opcao);
+
+    printf("\n--- RESULTADO DA COMPARAÇÃO ---\n\n");
+
+    // --- LÓGICA DE COMPARAÇÃO E EXIBIÇÃO (Switch e If-Else Aninhado) ---
+    switch(opcao) {
+        case 1: // População (Maior vence)
+            printf("Atributo escolhido: Populacao\n");
+            printf("%s: %d habitantes\n", carta1.pais, carta1.populacao);
+            printf("%s: %d habitantes\n", carta2.pais, carta2.populacao);
+            
+            if (carta1.populacao > carta2.populacao) {
+                printf("Resultado: %s Venceu!\n", carta1.pais);
+            } else if (carta2.populacao > carta1.populacao) {
+                printf("Resultado: %s Venceu!\n", carta2.pais);
+            } else {
+                printf("Resultado: Empate!\n");
+            }
+            break;
+
+        case 2: // Área (Maior vence)
+            printf("Atributo escolhido: Area\n");
+            printf("%s: %.2f km²\n", carta1.pais, carta1.area);
+            printf("%s: %.2f km²\n", carta2.pais, carta2.area);
+            
+            if (carta1.area > carta2.area) {
+                printf("Resultado: %s Venceu!\n", carta1.pais);
+            } else if (carta2.area > carta1.area) {
+                printf("Resultado: %s Venceu!\n", carta2.pais);
+            } else {
+                printf("Resultado: Empate!\n");
+            }
+            break;
+
+        case 3: // PIB (Maior vence)
+            printf("Atributo escolhido: PIB\n");
+            printf("%s: $%.2f trilhoes\n", carta1.pais, carta1.pib);
+            printf("%s: $%.2f trilhoes\n", carta2.pais, carta2.pib);
+            
+            if (carta1.pib > carta2.pib) {
+                printf("Resultado: %s Venceu!\n", carta1.pais);
+            } else if (carta2.pib > carta1.pib) {
+                printf("Resultado: %s Venceu!\n", carta2.pais);
+            } else {
+                printf("Resultado: Empate!\n");
+            }
+            break;
+
+        case 4: // Pontos Turísticos (Maior vence)
+            printf("Atributo escolhido: Pontos Turisticos\n");
+            printf("%s: %d pontos\n", carta1.pais, carta1.pontos_turisticos);
+            printf("%s: %d pontos\n", carta2.pais, carta2.pontos_turisticos);
+            
+            if (carta1.pontos_turisticos > carta2.pontos_turisticos) {
+                printf("Resultado: %s Venceu!\n", carta1.pais);
+            } else if (carta2.pontos_turisticos > carta1.pontos_turisticos) {
+                printf("Resultado: %s Venceu!\n", carta2.pais);
+            } else {
+                printf("Resultado: Empate!\n");
+            }
+            break;
+
+        case 5: // Densidade Demográfica (MENOR vence - Regra Invertida)
+            printf("Atributo escolhido: Densidade Demografica\n");
+            printf("%s: %.2f hab/km²\n", carta1.pais, carta1.densidade_demografica);
+            printf("%s: %.2f hab/km²\n", carta2.pais, carta2.densidade_demografica);
+            
+            // Lógica invertida com if-else aninhado
+            if (carta1.densidade_demografica < carta2.densidade_demografica) {
+                printf("Resultado: %s Venceu! (Menor densidade)\n", carta1.pais);
+            } else {
+                if (carta2.densidade_demografica < carta1.densidade_demografica) {
+                    printf("Resultado: %s Venceu! (Menor densidade)\n", carta2.pais);
+                } else {
+                    printf("Resultado: Empate!\n");
+                }
+            }
+            break;
+
+        default: // Segurança: Tratamento de entradas inválidas
+            printf("Opcao invalida! Por favor, escolha um numero de 1 a 5.\n");
+            break;
+    }
+
+    return 0;
+}
